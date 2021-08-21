@@ -4,7 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/side_projects/Tmdb/app/src/main/res/drawable/ic_blue_square_1_5bdc75aaebeb75dc7ae79426ddd9be3b2be1e342510f8202baf6bffa71d7f5c4.xml" value="0.3769230769230769" />
+        <entry key="..\:/side_projects/Tmdb/app/src/main/res/drawable/no_image_view_holder.xml" value="0.3769230769230769" />
+        <entry key="..\:/side_projects/Tmdb/app/src/main/res/drawable/star_rating.xml" value="0.3769230769230769" />
+        <entry key="..\:/side_projects/Tmdb/app/src/main/res/layout/activity_home.xml" value="0.36666666666666664" />
         <entry key="..\:/side_projects/Tmdb/app/src/main/res/layout/activity_splash.xml" value="0.35260416666666666" />
+        <entry key="..\:/side_projects/Tmdb/app/src/main/res/layout/custom_movie_card_view.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

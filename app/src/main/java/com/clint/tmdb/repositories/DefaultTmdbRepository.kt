@@ -1,5 +1,6 @@
 package com.clint.tmdb.repositories
 
+import androidx.lifecycle.LiveData
 import com.clint.tmdb.data.local.MovieList
 import com.clint.tmdb.data.local.TmdbDao
 import com.clint.tmdb.data.remote.TmdbApi
@@ -19,19 +20,23 @@ class DefaultTmdbRepository @Inject constructor(
     }
 
     override suspend fun getMovieList(apiKey: String, page: String): Resource<MovieListResponse> {
-       return try {
-           val response = tmdbApi.getMovieList(apiKey = apiKey, page = "1")
-           if (response.isSuccessful) {
-               response.body()?.let {
-                   return@let Resource.success(it)
-               } ?: Resource.error(UNKNOWN_ERROR_OCCURRED_DESCRIPTION, null)
-           } else {
-               Resource.error(UNKNOWN_ERROR_OCCURRED_DESCRIPTION, null)
-           }
+        return try {
+            val response = tmdbApi.getMovieList(apiKey = apiKey, page = "1")
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    return@let Resource.success(it)
+                } ?: Resource.error(UNKNOWN_ERROR_OCCURRED_DESCRIPTION, null)
+            } else {
+                Resource.error(UNKNOWN_ERROR_OCCURRED_DESCRIPTION, null)
+            }
 
-       } catch (e: Exception) {
-           Resource.error(INTERNET_ERROR_DESCRIPTION, null)
-       }
+        } catch (e: Exception) {
+            Resource.error(INTERNET_ERROR_DESCRIPTION, null)
+        }
+    }
+
+    override fun observeTopRatedMovies(): List<MovieList> {
+        return tmdbDao.observeTopRatedMovies()
     }
 
 }

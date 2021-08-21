@@ -1,8 +1,10 @@
 package com.clint.tmdb.data.local
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
 @Dao
 interface TmdbDao {
@@ -10,22 +12,7 @@ interface TmdbDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovie(movieList: MovieList)
 
+    @Query("SELECT * FROM movieList")
+    fun observeTopRatedMovies() : List<MovieList>
+
 }
-
-
-/*@Dao
-interface ZomatoDao {
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUser(zomatoUser: ZomatoUser)
-
-    @Delete
-    suspend fun deleteUser(zomatoUser: ZomatoUser)
-
-    @Query("SELECT * from zomato_user")
-    fun observeAllUsers(): LiveData<List<ZomatoUser>>
-
-    @Query("SELECT * from zomato_user where username= :username AND password= :password")
-    fun observeUser(username: String, password: String): LiveData<ZomatoUser>
-
-}*/

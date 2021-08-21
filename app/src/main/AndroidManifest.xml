@@ -3,6 +3,7 @@
     package="com.clint.tmdb">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".TmdbApplication"
         android:allowBackup="true"
@@ -11,6 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tmdb">
+        <activity
+            android:name=".ui.HomeActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.SplashActivity"
             android:exported="true">
