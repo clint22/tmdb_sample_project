@@ -15,6 +15,22 @@ class DefaultTmdbRepository @Inject constructor(
     private val tmdbApi: TmdbApi
 ) : TmdbRepository {
 
+    override fun getTopRatedMoviesByReleaseDateInDescendingOrder(): List<MovieList> {
+        return tmdbDao.getTopRatedMoviesByReleaseDateInDescendingOrder()
+    }
+
+    override fun getTopRatedMoviesByReleaseDateInAscendingOrder(): List<MovieList> {
+        return tmdbDao.getTopRatedMoviesByReleaseDateInAscendingOrder()
+    }
+
+    override fun getTopRatedMoviesByRatingInDescendingOrder(): List<MovieList> {
+        return tmdbDao.getTopRatedMoviesByRatingInDescendingOrder()
+    }
+
+    override fun getTopRatedMoviesByRatingInAscendingOrder(): List<MovieList> {
+        return tmdbDao.getTopRatedMoviesByRatingInAscendingOrder()
+    }
+
     override suspend fun updateMovie(status: String, movieId: Int) {
         tmdbDao.updateMovie(status = status, id = movieId)
     }

@@ -1,5 +1,6 @@
 package com.clint.tmdb.repositories
 
+import android.graphics.Movie
 import androidx.lifecycle.LiveData
 import com.clint.tmdb.data.local.MovieList
 import com.clint.tmdb.data.remote.responses.movieListResponse.MovieListResponse
@@ -17,11 +18,19 @@ interface TmdbRepository {
         page: String
     ): Resource<MovieListResponse>
 
-    fun observeTopRatedMovies() : List<MovieList>
+    fun observeTopRatedMovies(): List<MovieList>
+
+    fun getTopRatedMoviesByRatingInAscendingOrder(): List<MovieList>
+
+    fun getTopRatedMoviesByRatingInDescendingOrder(): List<MovieList>
+
+    fun getTopRatedMoviesByReleaseDateInAscendingOrder(): List<MovieList>
+
+    fun getTopRatedMoviesByReleaseDateInDescendingOrder(): List<MovieList>
 
     suspend fun getMovieDetails(
         apiKey: String,
         movieId: Int
-    ) : Resource<MovieResponse>
+    ): Resource<MovieResponse>
 
 }

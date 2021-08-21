@@ -2,4 +2,9 @@
     <string name="app_name">Tmdb</string>
     <string name="app_logo">TMDB Logo</string>
     <string name="movies">Movies</string>
+    <string name="sort_results_header">Sort Results By</string>
+    <string name="release_date_ascending">Release date ascending</string>
+    <string name="release_date_descending">Release date descending</string>
+    <string name="rating_ascending">Rating ascending</string>
+    <string name="rating_descending">Rating descending</string>
 </resources>

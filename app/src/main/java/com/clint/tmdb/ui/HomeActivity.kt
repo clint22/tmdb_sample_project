@@ -6,10 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clint.tmdb.data.local.MovieList
 import com.clint.tmdb.databinding.ActivityHomeBinding
+import com.clint.tmdb.others.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import timber.log.Timber
 
 @DelicateCoroutinesApi
@@ -18,6 +17,7 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private val tmdbViewModel: TmdbViewModel by viewModels()
+    private var customFilterDialog: CustomFilterDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +26,40 @@ class HomeActivity : AppCompatActivity() {
         setContentView(view)
         tmdbViewModel
         getTopRatedMovies()
+
+        binding.imageViewSorting.setOnClickListener {
+            customFilterDialog = CustomFilterDialog(this) { BUTTON_CLICKED ->
+                customFilterDialog?.dismiss()
+                getTopRatedMoviesBySorting(BUTTON_CLICKED)
+            }
+            customFilterDialog!!.show()
+        }
+    }
+
+    private fun getTopRatedMoviesBySorting(sortedBy: Int) {
+        GlobalScope.launch {
+            var sortedTopRatedMovies: List<MovieList>? = null
+            when (sortedBy) {
+                CUSTOM_DIALOG_RATING_ASC_ORDER_CLICKED -> {
+                    sortedTopRatedMovies = tmdbViewModel.getTopRatedMoviesByRatingInAscendingOrder()
+                }
+                CUSTOM_DIALOG_RATING_DESC_ORDER_CLICKED -> {
+                    sortedTopRatedMovies =
+                        tmdbViewModel.getTopRatedMoviesByRatingInDescendingOrder()
+                }
+                CUSTOM_DIALOG_RELEASE_DATE_ASC_ORDER_CLICKED -> {
+                    sortedTopRatedMovies =
+                        tmdbViewModel.getTopRatedMoviesByReleaseDateInAscendingOrder()
+                }
+                CUSTOM_DIALOG_RELEASE_DATE_DESC_ORDER_CLICKED -> {
+                    sortedTopRatedMovies =
+                        tmdbViewModel.getTopRatedMoviesByReleaseDateInDescendingOrder()
+                }
+            }
+            withContext(Dispatchers.Main) {
+                setAdapter(sortedTopRatedMovies)
+            }
+        }
     }
 
 

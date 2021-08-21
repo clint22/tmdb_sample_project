@@ -64,6 +64,25 @@ class TmdbViewModel @Inject constructor(private val tmdbRepository: TmdbReposito
 
     fun getTopRatedMovies(): List<MovieList> {
         return tmdbRepository.observeTopRatedMovies()
-
     }
+
+    fun getTopRatedMoviesByRatingInAscendingOrder(): List<MovieList> {
+        return tmdbRepository.getTopRatedMoviesByRatingInAscendingOrder()
+    }
+
+    fun getTopRatedMoviesByRatingInDescendingOrder(): List<MovieList> {
+        return tmdbRepository.getTopRatedMoviesByRatingInDescendingOrder()
+    }
+
+    fun getTopRatedMoviesByReleaseDateInAscendingOrder(): List<MovieList> {
+        return tmdbRepository.getTopRatedMoviesByReleaseDateInAscendingOrder()
+    }
+
+    fun getTopRatedMoviesByReleaseDateInDescendingOrder(): List<MovieList> {
+        return tmdbRepository.getTopRatedMoviesByReleaseDateInDescendingOrder()
+    }
+
+//    getTopRatedMoviesByReleaseDateInDescendingOrder
+
+
 }

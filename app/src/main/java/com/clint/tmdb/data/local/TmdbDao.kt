@@ -18,4 +18,16 @@ interface TmdbDao {
     @Query("SELECT * FROM movieList")
     fun observeTopRatedMovies(): List<MovieList>
 
+    @Query("SELECT * FROM movieList order by rating ASC")
+    fun getTopRatedMoviesByRatingInAscendingOrder(): List<MovieList>
+
+    @Query("SELECT * FROM movieList order by rating DESC")
+    fun getTopRatedMoviesByRatingInDescendingOrder(): List<MovieList>
+
+    @Query("SELECT * FROM movieList order by releaseDate ASC")
+    fun getTopRatedMoviesByReleaseDateInAscendingOrder(): List<MovieList>
+
+    @Query("SELECT * FROM movieList order by releaseDate DESC")
+    fun getTopRatedMoviesByReleaseDateInDescendingOrder(): List<MovieList>
+
 }
