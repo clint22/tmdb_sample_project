@@ -12,7 +12,10 @@ interface TmdbDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovie(movieList: MovieList)
 
+    @Query("UPDATE movieList SET status = :status where id = :id")
+    suspend fun updateMovie(status: String, id: Int)
+
     @Query("SELECT * FROM movieList")
-    fun observeTopRatedMovies() : List<MovieList>
+    fun observeTopRatedMovies(): List<MovieList>
 
 }

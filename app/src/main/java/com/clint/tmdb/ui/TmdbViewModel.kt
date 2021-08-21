@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.clint.tmdb.data.local.MovieList
 import com.clint.tmdb.data.remote.responses.movieListResponse.MovieListResponse
 import com.clint.tmdb.data.remote.responses.movieListResponse.Result
+import com.clint.tmdb.data.remote.responses.movieResponses.MovieResponse
 import com.clint.tmdb.others.Resource
 import com.clint.tmdb.repositories.TmdbRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,14 +18,25 @@ class TmdbViewModel @Inject constructor(private val tmdbRepository: TmdbReposito
     private val _movieList = MutableLiveData<Resource<MovieListResponse>>()
     val movieList: LiveData<Resource<MovieListResponse>> = _movieList
 
-    private val _topRatedMoviesList = MutableLiveData<List<MovieList>>()
-    val topRatedMoviesList: LiveData<List<MovieList>> = _topRatedMoviesList
+    private val _movieDetails = MutableLiveData<Resource<MovieResponse>>()
+    val movieDetails: LiveData<Resource<MovieResponse>> = _movieDetails
 
+    fun getMovieDetails(apiKey: String, movieId: Int) {
+        _movieDetails.postValue(Resource.loading(null))
+        viewModelScope.launch {
+            val response = tmdbRepository.getMovieDetails(apiKey = apiKey, movieId = movieId)
+            _movieDetails.postValue(response)
+        }
+    }
 
-    fun getMovieList(apiKey: String, page: String) {
+    fun updateMovie(status: String, movieId: Int) = viewModelScope.launch {
+        tmdbRepository.updateMovie(status = status, movieId = movieId)
+    }
+
+    fun getTopRatedMovieList(apiKey: String, page: String) {
         _movieList.postValue(Resource.loading(null))
         viewModelScope.launch {
-            val response = tmdbRepository.getMovieList(apiKey = apiKey, page = page)
+            val response = tmdbRepository.getTopRatedMovieList(apiKey = apiKey, page = page)
             _movieList.postValue(response)
         }
     }
@@ -40,7 +52,8 @@ class TmdbViewModel @Inject constructor(private val tmdbRepository: TmdbReposito
             posterPath = movieDetails.poster_path,
             overView = movieDetails.overview,
             status = null,
-            tagline = null
+            tagline = null,
+            totalCount = movieDetails.vote_count
         )
         insertMovieIntoDb(movieList)
     }

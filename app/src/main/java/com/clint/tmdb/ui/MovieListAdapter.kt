@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.clint.tmdb.R
 import com.clint.tmdb.data.local.MovieList
 import com.clint.tmdb.others.POSTER_PATH_BASE_URL
+import com.clint.tmdb.others.convertStringToDate
+import com.clint.tmdb.others.formatToViewDateDefaults
 
 class MovieListAdapter(private val movieList: List<MovieList>?, private val context: Context) :
     RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
@@ -24,8 +26,9 @@ class MovieListAdapter(private val movieList: List<MovieList>?, private val cont
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val ItemsViewModel = movieList?.get(position)
         holder.textViewTitle.text = ItemsViewModel?.title ?: "Title not available"
-        holder.textViewReleaseDate.text = ItemsViewModel?.releaseDate ?: "Release not available"
+        holder.textViewReleaseDate.text = convertToDisplayDateFormat(ItemsViewModel?.releaseDate)
         holder.textViewRating.text = ItemsViewModel?.rating.toString()
+        holder.textViewTotalVotes.text = ItemsViewModel?.totalCount.toString()
 
         val posterImageCompletePath = POSTER_PATH_BASE_URL + ItemsViewModel?.posterPath
 
@@ -34,8 +37,13 @@ class MovieListAdapter(private val movieList: List<MovieList>?, private val cont
             .load(posterImageCompletePath)
             .centerCrop()
             .placeholder(R.drawable.no_image_view_holder)
-            .into(holder.imageViewPoster);
+            .into(holder.imageViewPoster)
 
+    }
+
+    private fun convertToDisplayDateFormat(releaseDate: String?): CharSequence? {
+        val date = releaseDate?.convertStringToDate()
+        return date?.formatToViewDateDefaults()
     }
 
     override fun getItemCount(): Int {
@@ -48,6 +56,7 @@ class MovieListAdapter(private val movieList: List<MovieList>?, private val cont
         val textViewTitle: TextView = itemView.findViewById(R.id.textViewTitle)
         val textViewReleaseDate: TextView = itemView.findViewById(R.id.textViewReleaseDate)
         val textViewRating: TextView = itemView.findViewById(R.id.textViewRating)
+        val textViewTotalVotes: TextView = itemView.findViewById(R.id.textViewTotalVotes)
 
     }
 }

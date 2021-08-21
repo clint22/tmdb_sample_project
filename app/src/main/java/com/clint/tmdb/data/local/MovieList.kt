@@ -14,5 +14,6 @@ data class MovieList(
     val posterPath: String?,
     val overView: String?,
     val status: String?,
-    val tagline: String?
+    val tagline: String?,
+    val totalCount: Int?
 )

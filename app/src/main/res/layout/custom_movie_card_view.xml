@@ -9,6 +9,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:padding="10dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="2dp"
@@ -19,21 +21,35 @@
         <ImageView
             android:id="@+id/imageViewPoster"
             android:layout_width="120dp"
-            android:scaleType="centerCrop"
             android:layout_height="match_parent"
+            android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/textViewRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/karla_normal"
+            android:textColor="@color/yellow_400"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="7.1" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="40dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/karla_normal"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -44,18 +60,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/karla_normal"
                 android:textSize="14sp"
                 tools:text="Jan 26, 2019" />
 
             <TextView
-                android:id="@+id/textViewRating"
+                android:id="@+id/textViewTotalVotes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:drawablePadding="10dp"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/karla_normal"
                 android:textSize="14sp"
-                app:drawableStartCompat="@drawable/star_rating"
-                tools:text="7.1" />
+                tools:text="216"
+                app:drawableStartCompat="@drawable/ic_vote" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

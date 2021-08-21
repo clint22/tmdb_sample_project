@@ -41,6 +41,7 @@ class SplashActivity : AppCompatActivity() {
                     for (item in response.data?.results!!) {
                         tmdbViewModel.insertMovie(item)
                     }
+                    gotoHomeActivity()
                 }
                 Status.ERROR -> {
                     Timber.e(response.message)
@@ -50,6 +51,26 @@ class SplashActivity : AppCompatActivity() {
                 }
             }
         })
+
+        /*tmdbViewModel.movieDetails.observe(this, { response ->
+            when (response.status) {
+                Status.SUCCESS -> {
+                    Timber.e("movie_details_result %s", response.data)
+                    response.data?.id?.let {
+                        tmdbViewModel.updateMovie(
+                            status = response.data.status,
+                            it
+                        )
+                    }
+                }
+                Status.ERROR -> {
+                    Timber.e(response.message)
+                }
+                Status.LOADING -> {
+                    Timber.e("Loading")
+                }
+            }
+        })*/
     }
 
     private fun getTopRatedMoviesList() {
@@ -57,7 +78,7 @@ class SplashActivity : AppCompatActivity() {
             val topRatedMovies = tmdbViewModel.getTopRatedMovies()
             Timber.e("top_rated_movie_list %s", topRatedMovies)
             if (topRatedMovies.isNullOrEmpty()) {
-                tmdbViewModel.getMovieList(apiKey = BuildConfig.API_KEY, page = "1")
+                tmdbViewModel.getTopRatedMovieList(apiKey = BuildConfig.API_KEY, page = "1")
             } else {
                 gotoHomeActivity()
             }
