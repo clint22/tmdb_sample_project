@@ -20,15 +20,19 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private val tmdbViewModel: TmdbViewModel by viewModels()
+//    A dialog that shows the different types of sorting options available.
     private var customFilterDialog: CustomFilterDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityHomeBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
         tmdbViewModel
+
+//        Fetching the top rated movies list using the Room DB.
         getTopRatedMovies()
 
         binding.imageViewSorting.setOnClickListener {
@@ -42,6 +46,8 @@ class HomeActivity : AppCompatActivity() {
         binding.textViewSortedBy.visibility = View.GONE
     }
 
+//    A function that checks which sorting option is clicked and update the movie list according to that.
+//    A new Movie list is fetched according to the sorting param.
     private fun getTopRatedMoviesBySorting(sortedBy: Int) {
         var sortedByDescription: String? = null
         GlobalScope.launch {
@@ -76,6 +82,8 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
+//  A recycler view with a linear layout manager, and a lambda function that returns the movie ID and
+//    redirects to the movie details screen with the movie ID.
     private fun setAdapter(movieList: List<MovieList>?) {
 
         val adapter = MovieListAdapter(movieList, { movieId ->
@@ -89,6 +97,7 @@ class HomeActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
     }
 
+//    Will fetch the top rated movies list and then pass it to the adapter.
     private fun getTopRatedMovies() {
         GlobalScope.launch {
             val topRatedMovies = tmdbViewModel.getTopRatedMovies()

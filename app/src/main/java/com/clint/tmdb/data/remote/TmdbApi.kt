@@ -7,6 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+// Interface which holds the details of the API.
 interface TmdbApi {
 
     @GET("movie/top_rated")

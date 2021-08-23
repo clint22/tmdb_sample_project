@@ -5,6 +5,8 @@ import com.clint.tmdb.data.remote.responses.movieListResponse.MovieListResponse
 import com.clint.tmdb.data.remote.responses.movieResponses.MovieResponse
 import com.clint.tmdb.others.Resource
 
+// This interface will hold the complete details of the functionalities that this app needs. Whichever class extends this interface, will
+// have to define the function details. This method is useful when it comes to testing.
 interface TmdbRepository {
 
     suspend fun insertMovie(movieList: MovieList)

@@ -25,12 +25,13 @@ class MovieDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        binding.lottieAnimationView.visibility = View.VISIBLE
-        binding.parentConstraintLayout.visibility = View.GONE
+//        A function to update the loading animation view.
+        updateLoadingAnimations(loadingStatus = true)
 
         tmdbViewModel
         getPassedData()
@@ -39,6 +40,8 @@ class MovieDetailsActivity : AppCompatActivity() {
         binding.textViewBackButton.setOnClickListener { onBackPressed() }
     }
 
+    //    Observing the viewModel to get the movie details from the network, and then update those details
+    //    with the movie ID.
     private fun observeViewModel() {
         tmdbViewModel.movieDetails.observe(this, { response ->
             when (response.status) {
@@ -49,12 +52,19 @@ class MovieDetailsActivity : AppCompatActivity() {
                 }
                 Status.ERROR -> {
                     Timber.e(response.message)
+                    showErrorView(response.message)
                 }
                 Status.LOADING -> {
-                    Timber.e("Loading")
+                    updateLoadingAnimations(loadingStatus = true)
                 }
             }
         })
+    }
+
+    private fun showErrorView(message: String?) {
+        binding.parentConstraintLayout.visibility = View.GONE
+        binding.linearLayoutErrorView.visibility = View.VISIBLE
+        binding.textViewErrorDescription.text = message
     }
 
     private fun updateMovieDetails(data: MovieResponse?) {
@@ -76,6 +86,8 @@ class MovieDetailsActivity : AppCompatActivity() {
         checkIfMovieDetailsAlreadyUpdated()
     }
 
+    //    A function that collects the movie ID that was passed from the Home screen. And, then checks if the movie details
+//    are already cached in the local DB or not.
     private fun getPassedData() {
         movieId = intent.getIntExtra(MOVIE_ID_NAME, 0)
         Timber.e("movieId %s", movieId)
@@ -84,6 +96,8 @@ class MovieDetailsActivity : AppCompatActivity() {
         }
     }
 
+    //    A function that checks if the movie details are already cached or not. If it is already cached,
+//    then we will fetch the details from the local dB. Else, there will be a network call to get the movie details.
     private fun checkIfMovieDetailsAlreadyUpdated() {
         GlobalScope.launch {
             val topRatedMoviesByMovieId = tmdbViewModel.getTopRatedMoviesByMovieId(movieId)
@@ -100,8 +114,8 @@ class MovieDetailsActivity : AppCompatActivity() {
 
     private fun setupUI(movie: MovieList) {
 
-        binding.lottieAnimationView.visibility = View.GONE
-        binding.parentConstraintLayout.visibility = View.VISIBLE
+        updateLoadingAnimations(false)
+
 
         binding.textViewToolbarTitle.text = movie.title
         binding.textViewGenres.text = movie.genres
@@ -123,5 +137,16 @@ class MovieDetailsActivity : AppCompatActivity() {
             .centerCrop()
             .placeholder(R.drawable.no_image_view_holder)
             .into(binding.imageViewBackdrop)
+    }
+
+
+    private fun updateLoadingAnimations(loadingStatus: Boolean) {
+        if (!loadingStatus) {
+            binding.lottieAnimationView.visibility = View.GONE
+            binding.parentConstraintLayout.visibility = View.VISIBLE
+        } else {
+            binding.lottieAnimationView.visibility = View.VISIBLE
+            binding.parentConstraintLayout.visibility = View.GONE
+        }
     }
 }

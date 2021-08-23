@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Window
 import com.clint.tmdb.databinding.CustomFilterDialogBinding
 
+
 class CustomFilterDialog(private var mContext: Context, var onFilterItemClicked : (Int) -> Unit) : Dialog(mContext){
 
     lateinit var binding: CustomFilterDialogBinding

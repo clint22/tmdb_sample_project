@@ -35,6 +35,7 @@ class MovieListAdapter(
         holder.textViewRating.text = itemsViewModel?.rating.toString()
         holder.textViewTotalVotes.text = itemsViewModel?.totalCount.toString()
 
+//        Concatenating the base poster path with the movie poster path
         val posterImageCompletePath = POSTER_PATH_BASE_URL + itemsViewModel?.posterPath
 
         Glide
@@ -49,6 +50,7 @@ class MovieListAdapter(
         }
     }
 
+//    Converts the recieved date format to a display date format using the extension functions.
     private fun convertToDisplayDateFormat(releaseDate: String?): CharSequence? {
         val date = releaseDate?.convertStringToDate()
         return date?.formatToViewDateDefaults()

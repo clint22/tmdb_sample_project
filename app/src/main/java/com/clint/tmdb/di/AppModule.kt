@@ -20,16 +20,19 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+// Dagger hilt object class that initializes the functions that provides the DI.
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    //    DI function that provides the database object.
     @Singleton
     @Provides
     fun provideTmdbDatabase(@ApplicationContext context: Context) =
         Room.databaseBuilder(context, TmdbDatabase::class.java, DATABASE_NAME)
             .fallbackToDestructiveMigration().build()
 
+    //    DI function that provides the default repository by passing the params of Dao class and the API class.
     @Singleton
     @Provides
     fun provideDefaultTmdbRepository(
@@ -37,12 +40,14 @@ object AppModule {
         api: TmdbApi
     ) = DefaultTmdbRepository(dao, api) as TmdbRepository
 
+    //    DI function that provides the dao class by passing the params of database object.
     @Singleton
     @Provides
     fun provideTmdbDao(
         database: TmdbDatabase
     ) = database.tmdbDao()
 
+    //    DI function that provides the retrofit client object.
     @Singleton
     @Provides
     fun provideTmdbApi(): TmdbApi {

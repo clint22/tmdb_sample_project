@@ -1,5 +1,6 @@
 package com.clint.tmdb.data.remote.responses.movieResponses
 
+// The data class which holds the details of the movie details responses.
 data class MovieResponse(
     val adult: Boolean,
     val backdrop_path: String,
