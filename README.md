@@ -7,3 +7,7 @@ Tmdb sample project is a demo application that is based on modern Android archit
 Add your [TMDB](https://www.themoviedb.org/) API key in local.properties. 
 
 ```API_KEY=YOUR_API_KEY```
+
+# Tech stack and open source libraries 
+
+* Minimum SDK level 21
