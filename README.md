@@ -21,3 +21,7 @@ Add your [TMDB](https://www.themoviedb.org/) API key in local.properties.
 * [LottieFiles](https://lottiefiles.com/) Animations
 
 ![Preview GIF](https://github.com/clint22/tmdb_sample_project/blob/master/previews/tmdb_sample_gif.gif)
+
+# Find this repository useful? ❤️
+
+Support me through [Buy me a coffee](https://www.buymeacoffee.com/clintpaul_dev) 🤟🏻
