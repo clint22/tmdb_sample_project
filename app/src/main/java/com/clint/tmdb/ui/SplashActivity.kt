@@ -48,8 +48,8 @@ class SplashActivity : AppCompatActivity() {
 //                   Inserting the movie details using the Room DB. After that, will be redirected to
 //                    the Home screen.
                     /**
-                    *  Check [com.clint.tmdb.data.local.TmdbDao.kt] for more details.
-                    */
+                     *  Check [com.clint.tmdb.data.local.TmdbDao.kt] for more details.
+                     */
                     for (item in response.data?.results!!) {
                         tmdbViewModel.insertMovie(item)
                     }
@@ -67,7 +67,7 @@ class SplashActivity : AppCompatActivity() {
 
     }
 
-//    If there is some error occurred, an error view will be shown by hiding the parent layout.
+    //    If there is some error occurred, an error view will be shown by hiding the parent layout.
     private fun showErrorView(message: String?) {
         binding.parentConstraintLayout.visibility = View.GONE
         binding.linearLayoutErrorView.visibility = View.VISIBLE
@@ -95,5 +95,6 @@ class SplashActivity : AppCompatActivity() {
     private fun gotoHomeActivity() {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
+        finish()
     }
 }

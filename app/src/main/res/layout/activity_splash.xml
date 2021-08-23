@@ -9,20 +9,20 @@
     <LinearLayout
         android:id="@+id/linearLayoutErrorView"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="wrap_content">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:layout_gravity="center"
             android:id="@+id/lottieAnimationViewErrorOccurred"
             android:layout_width="100dp"
-            android:visibility="visible"
             android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:visibility="visible"
             app:lottie_autoPlay="true"
             app:lottie_fileName="lottie/error.json"
             app:lottie_loop="true" />
@@ -32,32 +32,32 @@
             android:id="@+id/textViewErrorDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
             android:layout_gravity="center"
-            android:fontFamily="@font/karla_normal"
-            android:textColor="@color/black"
             android:layout_marginTop="16dp"
-            tools:text="Sorry, some error occurred."
+            android:fontFamily="@font/karla_normal"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/lottieAnimationViewErrorOccurred"
             app:layout_constraintStart_toStartOf="@+id/lottieAnimationViewErrorOccurred"
-            app:layout_constraintTop_toBottomOf="@+id/lottieAnimationViewErrorOccurred" />
+            app:layout_constraintTop_toBottomOf="@+id/lottieAnimationViewErrorOccurred"
+            tools:text="Sorry, some error occurred." />
 
     </LinearLayout>
-
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/parentConstraintLayout"
         android:layout_width="match_parent"
-        android:visibility="visible"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/app_logo"
-            android:src="@drawable/tmdb_logo"
+            android:src="@drawable/tmdb_home_logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

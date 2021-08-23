@@ -62,6 +62,7 @@ class MovieDetailsActivity : AppCompatActivity() {
     }
 
     private fun showErrorView(message: String?) {
+        updateLoadingAnimations(loadingStatus = false)
         binding.parentConstraintLayout.visibility = View.GONE
         binding.linearLayoutErrorView.visibility = View.VISIBLE
         binding.textViewErrorDescription.text = message
