@@ -32,7 +32,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/karla_normal"
-            android:text="@string/movies"
+            android:text="@string/top_rated_movies"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />

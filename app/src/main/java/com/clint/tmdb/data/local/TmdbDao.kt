@@ -1,6 +1,5 @@
 package com.clint.tmdb.data.local
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -12,8 +11,15 @@ interface TmdbDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovie(movieList: MovieList)
 
-    @Query("UPDATE movieList SET status = :status where id = :id")
-    suspend fun updateMovie(status: String, id: Int)
+    @Query("UPDATE movieList SET status = :status,backdropPath = :backdropPath,genres = :genres,updatedMovieDetails =  :updatedMovieDetails, runTime = :runTime where id = :id")
+    suspend fun updateMovie(
+        status: String?,
+        backdropPath: String?,
+        updatedMovieDetails: Boolean,
+        genres: String?,
+        runTime: Int?,
+        id: Int
+    )
 
     @Query("SELECT * FROM movieList")
     fun observeTopRatedMovies(): List<MovieList>
@@ -29,5 +35,8 @@ interface TmdbDao {
 
     @Query("SELECT * FROM movieList order by releaseDate DESC")
     fun getTopRatedMoviesByReleaseDateInDescendingOrder(): List<MovieList>
+
+    @Query("SELECT * FROM movieList where id = :movieId")
+    fun getTopRatedMoviesByMovieId(movieId: Int): MovieList
 
 }

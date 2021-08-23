@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tmdb">
         <activity
+            android:name=".ui.MovieDetailsActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.HomeActivity"
             android:exported="true" />
         <activity

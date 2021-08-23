@@ -15,5 +15,9 @@ data class MovieList(
     val overView: String?,
     val status: String?,
     val tagline: String?,
-    val totalCount: Int?
+    val totalCount: Int?,
+    val backdropPath: String?,
+    val genres: String?,
+    val updatedMovieDetails: Boolean = false,
+    val runTime: Int?
 )

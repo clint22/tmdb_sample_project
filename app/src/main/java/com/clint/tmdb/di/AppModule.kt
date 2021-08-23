@@ -27,7 +27,8 @@ object AppModule {
     @Singleton
     @Provides
     fun provideTmdbDatabase(@ApplicationContext context: Context) =
-        Room.databaseBuilder(context, TmdbDatabase::class.java, DATABASE_NAME).build()
+        Room.databaseBuilder(context, TmdbDatabase::class.java, DATABASE_NAME)
+            .fallbackToDestructiveMigration().build()
 
     @Singleton
     @Provides

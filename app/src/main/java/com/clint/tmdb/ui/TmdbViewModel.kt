@@ -29,8 +29,22 @@ class TmdbViewModel @Inject constructor(private val tmdbRepository: TmdbReposito
         }
     }
 
-    fun updateMovie(status: String, movieId: Int) = viewModelScope.launch {
-        tmdbRepository.updateMovie(status = status, movieId = movieId)
+    fun updateMovie(
+        status: String?,
+        genres: String?,
+        backdropPath: String?,
+        updatedMovieDetails: Boolean,
+        runTime: Int?,
+        movieId: Int
+    ) = viewModelScope.launch {
+        tmdbRepository.updateMovie(
+            status = status,
+            movieId = movieId,
+            genres = genres,
+            backdropPath = backdropPath,
+            updatedMovieDetails = updatedMovieDetails,
+            runTime = runTime
+        )
     }
 
     fun getTopRatedMovieList(apiKey: String, page: String) {
@@ -53,7 +67,11 @@ class TmdbViewModel @Inject constructor(private val tmdbRepository: TmdbReposito
             overView = movieDetails.overview,
             status = null,
             tagline = null,
-            totalCount = movieDetails.vote_count
+            totalCount = movieDetails.vote_count,
+            backdropPath = "",
+            genres = "",
+            updatedMovieDetails = false,
+            runTime = 0
         )
         insertMovieIntoDb(movieList)
     }
@@ -82,7 +100,9 @@ class TmdbViewModel @Inject constructor(private val tmdbRepository: TmdbReposito
         return tmdbRepository.getTopRatedMoviesByReleaseDateInDescendingOrder()
     }
 
-//    getTopRatedMoviesByReleaseDateInDescendingOrder
+    fun getTopRatedMoviesByMovieId(movieId: Int): MovieList {
+        return tmdbRepository.getTopRatedMoviesByMovieId(movieId = movieId)
+    }
 
 
 }

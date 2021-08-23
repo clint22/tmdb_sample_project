@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.clint.tmdb.R
@@ -14,7 +15,11 @@ import com.clint.tmdb.others.POSTER_PATH_BASE_URL
 import com.clint.tmdb.others.convertStringToDate
 import com.clint.tmdb.others.formatToViewDateDefaults
 
-class MovieListAdapter(private val movieList: List<MovieList>?, private val context: Context) :
+class MovieListAdapter(
+    private val movieList: List<MovieList>?,
+    var onMovieClicked: (Int) -> Unit,
+    private val context: Context
+) :
     RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,13 +29,13 @@ class MovieListAdapter(private val movieList: List<MovieList>?, private val cont
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val ItemsViewModel = movieList?.get(position)
-        holder.textViewTitle.text = ItemsViewModel?.title ?: "Title not available"
-        holder.textViewReleaseDate.text = convertToDisplayDateFormat(ItemsViewModel?.releaseDate)
-        holder.textViewRating.text = ItemsViewModel?.rating.toString()
-        holder.textViewTotalVotes.text = ItemsViewModel?.totalCount.toString()
+        val itemsViewModel = movieList?.get(position)
+        holder.textViewTitle.text = itemsViewModel?.title ?: "Title not available"
+        holder.textViewReleaseDate.text = convertToDisplayDateFormat(itemsViewModel?.releaseDate)
+        holder.textViewRating.text = itemsViewModel?.rating.toString()
+        holder.textViewTotalVotes.text = itemsViewModel?.totalCount.toString()
 
-        val posterImageCompletePath = POSTER_PATH_BASE_URL + ItemsViewModel?.posterPath
+        val posterImageCompletePath = POSTER_PATH_BASE_URL + itemsViewModel?.posterPath
 
         Glide
             .with(context)
@@ -39,6 +44,9 @@ class MovieListAdapter(private val movieList: List<MovieList>?, private val cont
             .placeholder(R.drawable.no_image_view_holder)
             .into(holder.imageViewPoster)
 
+        holder.cardViewMovieDetails.setOnClickListener {
+            itemsViewModel?.id?.let { it1 -> onMovieClicked(it1) }
+        }
     }
 
     private fun convertToDisplayDateFormat(releaseDate: String?): CharSequence? {
@@ -57,6 +65,7 @@ class MovieListAdapter(private val movieList: List<MovieList>?, private val cont
         val textViewReleaseDate: TextView = itemView.findViewById(R.id.textViewReleaseDate)
         val textViewRating: TextView = itemView.findViewById(R.id.textViewRating)
         val textViewTotalVotes: TextView = itemView.findViewById(R.id.textViewTotalVotes)
+        val cardViewMovieDetails: CardView = itemView.findViewById(R.id.cardViewMovieDetails)
 
     }
 }

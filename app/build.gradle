@@ -119,7 +119,4 @@ dependencies {
 //    RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
-//    Spinner
-    implementation "com.github.skydoves:balloon:1.3.6"
-
 }

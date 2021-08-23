@@ -2,6 +2,7 @@ package com.clint.tmdb.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.clint.tmdb.BuildConfig
@@ -52,25 +53,6 @@ class SplashActivity : AppCompatActivity() {
             }
         })
 
-        /*tmdbViewModel.movieDetails.observe(this, { response ->
-            when (response.status) {
-                Status.SUCCESS -> {
-                    Timber.e("movie_details_result %s", response.data)
-                    response.data?.id?.let {
-                        tmdbViewModel.updateMovie(
-                            status = response.data.status,
-                            it
-                        )
-                    }
-                }
-                Status.ERROR -> {
-                    Timber.e(response.message)
-                }
-                Status.LOADING -> {
-                    Timber.e("Loading")
-                }
-            }
-        })*/
     }
 
     private fun getTopRatedMoviesList() {
@@ -80,7 +62,10 @@ class SplashActivity : AppCompatActivity() {
             if (topRatedMovies.isNullOrEmpty()) {
                 tmdbViewModel.getTopRatedMovieList(apiKey = BuildConfig.API_KEY, page = "1")
             } else {
-                gotoHomeActivity()
+                Handler(mainLooper).postDelayed({
+                    gotoHomeActivity()
+                }, 2000)
+
             }
         }
 

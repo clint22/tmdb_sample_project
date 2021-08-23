@@ -1,5 +1,6 @@
 package com.clint.tmdb.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -65,7 +66,13 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setAdapter(movieList: List<MovieList>?) {
 
-        val adapter = MovieListAdapter(movieList, this)
+        val adapter = MovieListAdapter(movieList, { movieId ->
+
+            val intent = Intent(this, MovieDetailsActivity::class.java)
+            intent.putExtra(MOVIE_ID_NAME, movieId)
+            startActivity(intent)
+
+        }, this)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
     }

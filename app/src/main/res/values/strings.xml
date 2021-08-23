@@ -7,4 +7,9 @@
     <string name="release_date_descending">Release date descending</string>
     <string name="rating_ascending">Rating ascending</string>
     <string name="rating_descending">Rating descending</string>
+    <string name="top_rated_movies">Top Rated Movies</string>
+    <string name="image_back_btn_desc">Back button</string>
+    <string name="movie_name_with_release_date">%1$s (%2$s) </string>
+    <string name="over_view">Overview</string>
+    <string name="duration">%1$dh:%2$dm</string>
 </resources>
