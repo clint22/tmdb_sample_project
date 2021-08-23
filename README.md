@@ -19,3 +19,5 @@ Add your [TMDB](https://www.themoviedb.org/) API key in local.properties.
 * [Retrofit](https://square.github.io/retrofit/) Networking library
 * [Timber](https://github.com/JakeWharton/timber) Logging library 
 * [LottieFiles](https://lottiefiles.com/) Animations
+
+(https://github.com/clint22/tmdb_sample_project/blob/master/previews/tmdb_sample_gif.gif)
