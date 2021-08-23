@@ -3,6 +3,7 @@ package com.clint.tmdb.ui
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.clint.tmdb.BuildConfig
@@ -46,6 +47,7 @@ class SplashActivity : AppCompatActivity() {
                 }
                 Status.ERROR -> {
                     Timber.e(response.message)
+                    showErrorView(response.message)
                 }
                 Status.LOADING -> {
                     Timber.e("Loading")
@@ -53,6 +55,12 @@ class SplashActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    private fun showErrorView(message: String?) {
+        binding.parentConstraintLayout.visibility = View.GONE
+        binding.linearLayoutErrorView.visibility = View.VISIBLE
+        binding.textViewErrorDescription.text = message
     }
 
     private fun getTopRatedMoviesList() {
