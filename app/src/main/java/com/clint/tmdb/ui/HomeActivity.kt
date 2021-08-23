@@ -2,9 +2,11 @@ package com.clint.tmdb.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.clint.tmdb.R
 import com.clint.tmdb.data.local.MovieList
 import com.clint.tmdb.databinding.ActivityHomeBinding
 import com.clint.tmdb.others.*
@@ -25,6 +27,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
         tmdbViewModel
         getTopRatedMovies()
 
@@ -35,29 +38,38 @@ class HomeActivity : AppCompatActivity() {
             }
             customFilterDialog!!.show()
         }
+
+        binding.textViewSortedBy.visibility = View.GONE
     }
 
     private fun getTopRatedMoviesBySorting(sortedBy: Int) {
+        var sortedByDescription: String? = null
         GlobalScope.launch {
             var sortedTopRatedMovies: List<MovieList>? = null
             when (sortedBy) {
                 CUSTOM_DIALOG_RATING_ASC_ORDER_CLICKED -> {
+                    sortedByDescription = getString(R.string.sorted_by_rating_ascending)
                     sortedTopRatedMovies = tmdbViewModel.getTopRatedMoviesByRatingInAscendingOrder()
                 }
                 CUSTOM_DIALOG_RATING_DESC_ORDER_CLICKED -> {
+                    sortedByDescription = getString(R.string.sorted_by_rating_descending)
                     sortedTopRatedMovies =
                         tmdbViewModel.getTopRatedMoviesByRatingInDescendingOrder()
                 }
                 CUSTOM_DIALOG_RELEASE_DATE_ASC_ORDER_CLICKED -> {
+                    sortedByDescription = getString(R.string.sorted_by_release_date_ascending)
                     sortedTopRatedMovies =
                         tmdbViewModel.getTopRatedMoviesByReleaseDateInAscendingOrder()
                 }
                 CUSTOM_DIALOG_RELEASE_DATE_DESC_ORDER_CLICKED -> {
+                    sortedByDescription = getString(R.string.sorted_by_release_date_descending)
                     sortedTopRatedMovies =
                         tmdbViewModel.getTopRatedMoviesByReleaseDateInDescendingOrder()
                 }
             }
             withContext(Dispatchers.Main) {
+                binding.textViewSortedBy.visibility = View.VISIBLE
+                binding.textViewSortedBy.text = sortedByDescription
                 setAdapter(sortedTopRatedMovies)
             }
         }

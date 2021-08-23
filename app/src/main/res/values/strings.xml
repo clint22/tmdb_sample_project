@@ -12,4 +12,8 @@
     <string name="movie_name_with_release_date">%1$s (%2$s) </string>
     <string name="over_view">Overview</string>
     <string name="duration">%1$dh:%2$dm</string>
+    <string name="sorted_by_release_date_ascending">Sorted by release date ascending</string>
+    <string name="sorted_by_release_date_descending">Sorted by release date descending</string>
+    <string name="sorted_by_rating_ascending">Sorted by rating ascending</string>
+    <string name="sorted_by_rating_descending">Sorted by rating descending</string>
 </resources>

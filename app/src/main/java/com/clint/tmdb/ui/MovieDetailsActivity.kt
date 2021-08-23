@@ -2,6 +2,7 @@ package com.clint.tmdb.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.clint.tmdb.BuildConfig
@@ -27,6 +28,10 @@ class MovieDetailsActivity : AppCompatActivity() {
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        binding.lottieAnimationView.visibility = View.VISIBLE
+        binding.parentConstraintLayout.visibility = View.GONE
+
         tmdbViewModel
         getPassedData()
         observeViewModel()
@@ -94,6 +99,10 @@ class MovieDetailsActivity : AppCompatActivity() {
     }
 
     private fun setupUI(movie: MovieList) {
+
+        binding.lottieAnimationView.visibility = View.GONE
+        binding.parentConstraintLayout.visibility = View.VISIBLE
+
         binding.textViewToolbarTitle.text = movie.title
         binding.textViewGenres.text = movie.genres
         binding.textViewMovieTitleWithDate.text =
