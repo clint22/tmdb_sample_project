@@ -11,3 +11,6 @@ Add your [TMDB](https://www.themoviedb.org/) API key in local.properties.
 # Tech stack and open source libraries 
 
 * Minimum SDK level 21
+* 100% Kotlin based + [Coroutines](https://developer.android.com/kotlin/coroutines) based + [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) for asynchronous.
+* [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android) for dependency injection.
+* 
